@@ -1,0 +1,188 @@
+/* -------------------- Elements -------------------- */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("Assets/what-the-hex.png");
+    background-repeat: repeat;
+    margin: 0;
+}
+
+body p, h1, h2, li {
+    color: rgb(82, 158, 103)
+}
+
+canvas {
+    width: 100% !important;
+}
+
+footer {
+    width: 100%;
+    background: rgba(65, 131, 215, .2); /* Mariner blue background with 20% opacity */
+    text-align: center;
+}
+
+footer p {
+    color: rgb(82, 158, 103)
+}
+
+/* -------------------- ID's -------------------- */
+
+#bannerImage {
+    height: auto;
+    max-width: 500px;
+    width: auto;
+}
+#rightli { /* For the info page in the navabar */
+    float: right
+}
+
+#home-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* -------------------- Classes -------------------- */
+
+.banner {
+    background: rgba(0, 128, 128, 0.3); /* Teal background with 30% opacity */
+    text-align: center;
+}
+
+.welcome {
+    text-align: center;
+}
+
+/* ====== Navigation Bar ====== */
+
+.navBar {
+    position: sticky;
+    top: 0;
+    margin-bottom: 2%;
+    overflow: hidden;
+    background-color: rgb(50, 53, 49);
+    border-radius: 3px;
+}
+
+.navBar a {
+    float: left;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.navBar a.active {
+    background-color: rgb(96, 173, 65);
+    color: white;
+}
+
+/* ====== Grid ====== */
+
+.mainGrid {
+    display: grid;
+    display: wrap;
+    display: block;
+    grid-gap: 10px;
+    grid-template-columns: 30 40 30;
+    background: rgba(65, 131, 215, .2); /* Mariner blue background with 20% opacity */
+}
+
+.mainGrid.Info {
+    grid-column: 1;
+    grid-row: 1;
+    border-radius: 4px;
+}
+
+.mainGrid.Info  h1{
+    text-align: center;
+}
+
+/* ====== Chart ====== */
+
+.mainGrid.Chart {
+    grid-column: 2;
+    grid-row: 1;
+    height: auto;
+    width: 1fr;
+    border-radius: 4px;
+    padding: 30px;
+    overflow: auto;
+}
+
+.chart-options {
+    background: rgba(0, 128, 128, 0.3); /* Teal background with 30% opacity */
+}
+
+.chart-options input, p {
+    display: inline;
+}
+
+.mainGrid.Graph {
+    grid-column: 2;
+    grid-row: 1;
+    height: auto;
+    width: 1fr;
+    border-radius: 4px;
+    padding: 30px;
+    overflow: auto;
+}
+
+/* ====== Graph ======
+
+
+/* Main Grid (for the other pages) */
+
+/* .contentHead {
+    background-color: rgba(51, 51, 51, 0.7);
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.mainGrid.mainContent {
+    background-color: rgba(0, 80, 111, .5);
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.mainGrid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 160px 1fr;
+    grid-template-rows: 800px;
+    grid-template-areas: "Sidenav iframe";
+} */
+
+/* Side Nav */
+/*
+.sideNav {
+    grid-column: 1;
+    grid-row: 1;
+    width: 160px;
+    height: auto;
+    overflow: visible;
+    background-color: #333;
+    border-radius: 4px;
+}
+
+.sideNav a {
+    display: block;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.sideNav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.sideNav h3 {
+    display: block;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+} */

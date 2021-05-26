@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><WeightScale-Benji></WeightScale-Benji></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-database.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <header class="banner" >
+            <div class="banner background">
+                <a href="index.html">
+                    <img src="img/SCALE_HERO_Banner.png"
+                    alt="Website Bannner" id = "bannerImage">
+                </a>
+            </div>
+        </header>
+
+        <!-- <nav class="navBar">
+            <a class="active" href="index.html">Home</a>
+            <a href="co2-level.html">Gloabl CO2 Level</a>
+            <a href="temperature.html">Global Temperature</a>
+            <a href="ice-sheets.html">Mass of Ice Sheets</a>
+            <a href="sea-level.html">Global Sea Level</a>
+            <a href="info.html" id="rightli">Info</a>
+        </nav> -->
+
+        <div class="welcome">
+            <h1>Welcome Benji</h1>
+        </div>
+
+        <div class="mainGrid">
+
+            <div class = "mainGrid Info">
+                <ul>
+                    <li>This website includes graphs and information to help Benji look at his weight progress.</li>
+                    <li>This Data was collected using a micro:bit/weight scale</li>
+                    <li>You can collect your own data by downloading this <a href="Microbit/Microbit Data Upload.py" target="_blank">program</a> with this <a href="Microbit/microbitModule.py" target="_blank">module</a></li>
+                </ul>
+            </div>
+
+            <div class="mainGrid Chart">
+                <div class = 'chart-options'>
+                    <p>Data Month and Year: </p>
+                    <input id="yearMonthInput" type="month" min="2020-03" max="2099-12"><br>
+                    <p>Daily Average: </p>
+                    <input id="averageDay" type="checkbox" checked="true" onclick="averageDayData()">
+                </div>
+                <canvas id="liveChartCanvas"></canvas>
+            </div>
+
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <script src="JavaScript/index.js"></script>
+
+    </body>
+
+    <footer>
+        <p>The information presented has been gathered from various sources find them on the <a href="info.html">info page.</a><br>
+        For any questions please <a href="mailto:admin@currentclimate.dot">contact me.</a></p>
+    </footer>
+
+</html>
