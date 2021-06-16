@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><WeightScale-Benji></WeightScale-Benji></title>
+        <title>Scale-Hero</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-database.js"></script>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="js/index.js"></script>
+
     </head>
 
     <body>
@@ -19,6 +31,23 @@
             </div>
         </header>
 
+        <div id="dialog-form" title="Create new user">
+            <p class="validateTips">All form fields are required.</p>
+            <form>
+              <fieldset>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+              </fieldset>
+            </form>
+        </div>
+
         <!-- <nav class="navBar">
             <a class="active" href="index.html">Home</a>
             <a href="co2-level.html">Global CO2 Level</a>
@@ -28,40 +57,45 @@
             <a href="info.html" id="rightli">Info</a>
         </nav> -->
 
-        <div class="welcome">
-            <h1>Welcome Benji</h1>
+        <div class = "buttons">
+            <button id="sign-up" class = "button">Sign Up</button>
+            <button id="login" class = "button">Login</button>
         </div>
 
         <div class="mainGrid">
 
-            <div class = "mainGrid Info">
-                <ul>
-                    <li>This website includes graphs and information to help Benji look at his weight progress.</li>
-                    <li>This Data was collected using a micro:bit/weight scale</li>
-                    <li>You can collect your own data by downloading this <a href="Microbit/Microbit Data Upload.py" target="_blank">program</a> with this <a href="Microbit/microbitModule.py" target="_blank">module</a></li>
-                </ul>
+            <div class="item1 welcome">
+                <h1>Welcome Benji</h1>
             </div>
 
-            <div class="mainGrid Chart">
-                <div class = 'chart-options'>
-                    <p>Data Month and Year: </p>
-                    <input id="yearMonthInput" type="month" min="2020-03" max="2099-12"><br>
-                    <p>Daily Average: </p>
-                    <input id="averageDay" type="checkbox" checked="true" onclick="averageDayData()">
+            <div class = "item2 Info">
+                This website includes graphs and information to help Benji look at his weight progress.<br>
+                This Data was collected using a micro:bit/weight scale<br>
+                You can collect your own data by downloading this <a href="Microbit/Microbit Data Upload.py" target="_blank">program</a> with this <a href="Microbit/microbitModule.py" target="_blank">module</a>
+            </div>
+
+            <div class = "item3 Details">
+                Data and Details
+            </div>
+
+            <div class = "item4 Chart">
+                <div class = "chart">
+                <canvas id="liveChartCanvas" width="400" height="400"></canvas>
+                    <div class = "chart-settings">
+                        <button id = "settings-icon" onclick="javascript:alert('Settings')"><i class="fas fa-cog"></i></button>
+                    </div>
                 </div>
-                <canvas id="liveChartCanvas"></canvas>
             </div>
 
         </div>
-
+<!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <script src="JavaScript/index.js"></script>
+        <script src="JavaScript/index.js"></script> -->
 
     </body>
 
     <footer>
-        <p>The information presented has been gathered from various sources find them on the <a href="info.html">info page.</a><br>
-        For any questions please <a href="mailto:admin@currentclimate.dot">contact me.</a></p>
+        <p>For any questions please <a href="mailto:b.manzambi6@gmail.com">contact me.</a></p>
     </footer>
 
 </html>
