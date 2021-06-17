@@ -64,7 +64,10 @@ $( function() {
         return valid;
       }
 
-      dialog = $( "#dialog-form" ).dialog({
+      dialog = $("#dialog-form").dialog({
+        draggable: false,
+        resizable: false,
+        dialogClass: "no-close",
         autoOpen: false,
         height: 400,
         width: 350,
@@ -89,49 +92,52 @@ $( function() {
       $( "#sign-up" ).button().on( "click", function() {
         dialog.dialog( "open" );
       });
-  
+
       $( "#login" ).button().on( "click", function() {
         dialog.dialog( "open" );
       });
 });
 
 
+// ------------------- Chart Data -------------------//
+// localStorage.setItem(year, JSON.toString({
+//   labels: [],
+//   data: []
+// }))
 
-// ------------------- Chart-------------------//
 
+// ------------------- Chart-------------------
 
 var ctx = $('#liveChartCanvas');
 var myChart = new Chart(ctx, {
-    type: 'bar',
+  type: 'line',
+  // responsive: true,
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
+            backgroundColor: 'blue',
+            borderColor: 'black',
+            color: '#55bec0',
+            borderWidth: 1,
+            fill: false,
+            tension: .2,
+            spanGaps: true
+            
+  }]
     },
     options: {
         scales: {
             y: {
                 beginAtZero: true
             }
-        }
-    }
+        },
+        responsive: true,
+  }
+});
+
+// ------------------- button-------------------//
+$("#button").click(function(){
+  $("#go").css("background-color","yellow");
 });

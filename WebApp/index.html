@@ -11,18 +11,20 @@
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="/resources/demos/style.css">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-database.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="js/index.js"></script>
 
     </head>
 
     <body>
-        <header class="banner" >
+
+        <header>
+            <div class = "buttons">
+                <button id="sign-up" class = "button">Sign Up</button>
+                <button id="login" class = "button">Login</button>
+            </div>
             <div class="banner background">
                 <a href="index.html">
                     <img src="img/SCALE_HERO_Banner.png"
@@ -57,11 +59,6 @@
             <a href="info.html" id="rightli">Info</a>
         </nav> -->
 
-        <div class = "buttons">
-            <button id="sign-up" class = "button">Sign Up</button>
-            <button id="login" class = "button">Login</button>
-        </div>
-
         <div class="mainGrid">
 
             <div class="item1 welcome">
@@ -74,13 +71,16 @@
                 You can collect your own data by downloading this <a href="Microbit/Microbit Data Upload.py" target="_blank">program</a> with this <a href="Microbit/microbitModule.py" target="_blank">module</a>
             </div>
 
-            <div class = "item3 Details">
-                Data and Details
+            <div class = "item3 details">
+                Graph Details Here:
+                <ul>
+                    <li>Detail<li>
+                <ul>
             </div>
 
             <div class = "item4 Chart">
                 <div class = "chart">
-                <canvas id="liveChartCanvas" width="400" height="400"></canvas>
+                <canvas id="liveChartCanvas"></canvas>
                     <div class = "chart-settings">
                         <button id = "settings-icon" onclick="javascript:alert('Settings')"><i class="fas fa-cog"></i></button>
                     </div>
@@ -96,6 +96,8 @@
 
     <footer>
         <p>For any questions please <a href="mailto:b.manzambi6@gmail.com">contact me.</a></p>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="js/index.js"></script>
     </footer>
 
 </html>
