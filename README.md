@@ -3,7 +3,7 @@ A project to add a serial output to a scale, read that output into a database an
 
 ***
 
-Notes: 
+Notes:
   - https://web.dev/serial/
   - https://makecode.microbit.org/device/serial
   - https://pypi.org/project/pyserial/
