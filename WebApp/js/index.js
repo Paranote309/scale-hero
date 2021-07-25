@@ -1,12 +1,13 @@
 // ------------------- Login Modal Form -------------------//
 $( function() {
-    var dialog, form,
+    var form,
 
       // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
       emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
       name = $( "#name" ),
       email = $( "#email" ),
       password = $( "#password" ),
+      weight = $("#weight"),
       allFields = $( [] ).add( name ).add( email ).add( password ),
       tips = $( ".validateTips" );
 
@@ -54,17 +55,43 @@ $( function() {
         valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
 
         if ( valid ) {
-          $( "#users tbody" ).append( "<tr>" +
-            "<td>" + name.val() + "</td>" +
-            "<td>" + email.val() + "</td>" +
-            "<td>" + password.val() + "</td>" +
-          "</tr>" );
-          dialog.dialog( "close" );
+          create.dialog( "close" );
         }
         return valid;
-      }
+    }
 
-      create = $("#create-dialogue").dialog({
+    function login() {
+        var valid = true;
+        allFields.removeClass("ui-state-error");
+
+        valid = valid && checkLength( name, "username", 3, 16 );
+        valid = valid && checkLength( email, "email", 6, 80 );
+        valid = valid && checkLength( password, "password", 5, 16 );
+
+        if ( valid ) {
+            login.dialog( "close" );
+        }
+
+        return valid;
+    }
+
+    function addData() {
+        var valid = true
+        var weight_value = weight.val()
+        allFields.removeClass("ui-state-error");
+
+        valid &&= weight_value > 0;
+
+        if (valid) {
+            // add data to database
+            console.log(weight_value);
+            data.dialog( "close" );
+        }
+
+        return valid;
+    }
+
+    var create = $("#create-dialogue").dialog({
         draggable: false,
         resizable: false,
         dialogClass: "no-close",
@@ -84,8 +111,7 @@ $( function() {
         }
       });
 
-  
-      login = $("#login-dialogue").dialog({
+    var login = $("#login-dialogue").dialog({
         draggable: false,
         resizable: false,
         dialogClass: "no-close",
@@ -94,20 +120,40 @@ $( function() {
         width: 350,
         modal: true,
         buttons: {
-          "Create an account": addUser,
+          "Login": login,
           Cancel: function() {
             login.dialog( "close" );
           }
         },
         close: function() {
-          form[ 0 ].reset();
+          form[ 1 ].reset();
           allFields.removeClass( "ui-state-error" );
         }
       });
 
-      form = create.find( "form" ).on( "submit", function( event ) {
-        event.preventDefault();
-        addUser();
+    var data = $("#data-dialogue").dialog({
+        draggable: false,
+        resizable: false,
+        dialogClass: "no-close",
+        autoOpen: false,
+        height: 400,
+        width: 350,
+        modal: true,
+        buttons: {
+          "Add Data": addData,
+          Cancel: function() {
+            data.dialog( "close" );
+          }
+        },
+        close: function() {
+          form[ 2 ].reset(); // reset form
+          allFields.removeClass( "ui-state-error" );
+        }
+      });
+
+      // disable form submit
+      form = $( "form" ).on( "submit", function( event ) {
+        return false;
       });
 
       $( "#sign-up" ).button().on( "click", function() {
@@ -116,6 +162,10 @@ $( function() {
 
       $( "#login" ).button().on( "click", function() {
         login.dialog( "open" );
+      });
+
+      $( "#add-data" ).button().on( "click", function() {
+        data.dialog( "open" );
       });
 
 });
