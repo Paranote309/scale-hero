@@ -96,11 +96,11 @@ $( function() {
         resizable: false,
         dialogClass: "no-close",
         autoOpen: false,
-        height: 400,
+        // height: auto,
         width: 350,
         modal: true,
         buttons: {
-          "Create an account": addUser,
+          "Create": addUser,
           Cancel: function() {
             create.dialog( "close" );
           }
@@ -116,7 +116,7 @@ $( function() {
         resizable: false,
         dialogClass: "no-close",
         autoOpen: false,
-        height: 400,
+        // height: auto,
         width: 350,
         modal: true,
         buttons: {
@@ -136,11 +136,11 @@ $( function() {
         resizable: false,
         dialogClass: "no-close",
         autoOpen: false,
-        height: 400,
+        // height: auto,
         width: 350,
         modal: true,
         buttons: {
-          "Add Data": addData,
+          "Add": addData,
           Cancel: function() {
             data.dialog( "close" );
           }
