@@ -64,7 +64,7 @@ $( function() {
         return valid;
       }
 
-      dialog = $("#dialog-form").dialog({
+      create = $("#create-dialogue").dialog({
         draggable: false,
         resizable: false,
         dialogClass: "no-close",
@@ -75,7 +75,7 @@ $( function() {
         buttons: {
           "Create an account": addUser,
           Cancel: function() {
-            dialog.dialog( "close" );
+            create.dialog( "close" );
           }
         },
         close: function() {
@@ -84,26 +84,57 @@ $( function() {
         }
       });
 
-      form = dialog.find( "form" ).on( "submit", function( event ) {
+  
+      login = $("#login-dialogue").dialog({
+        draggable: false,
+        resizable: false,
+        dialogClass: "no-close",
+        autoOpen: false,
+        height: 400,
+        width: 350,
+        modal: true,
+        buttons: {
+          "Create an account": addUser,
+          Cancel: function() {
+            login.dialog( "close" );
+          }
+        },
+        close: function() {
+          form[ 0 ].reset();
+          allFields.removeClass( "ui-state-error" );
+        }
+      });
+
+      form = create.find( "form" ).on( "submit", function( event ) {
         event.preventDefault();
         addUser();
       });
 
       $( "#sign-up" ).button().on( "click", function() {
-        dialog.dialog( "open" );
+        create.dialog( "open" );
       });
 
       $( "#login" ).button().on( "click", function() {
-        dialog.dialog( "open" );
+        login.dialog( "open" );
       });
+
 });
 
-
 // ------------------- Chart Data -------------------//
-// localStorage.setItem(year, JSON.toString({
-//   labels: [],
-//   data: []
-// }))
+localStorage.setItem(2021, JSON.stringify({
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [{
+    label: '# of Votes',
+    data: [12, 19, 3, 5, 2, 3],
+    backgroundColor: 'blue',
+    borderColor: 'black',
+    color: '#55bec0',
+    borderWidth: 1,
+    fill: false,
+    tension: .2,
+    spanGaps: true
+  }]
+}))
 
 
 // ------------------- Chart-------------------
@@ -112,21 +143,7 @@ var ctx = $('#liveChartCanvas');
 var myChart = new Chart(ctx, {
   type: 'line',
   // responsive: true,
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: 'blue',
-            borderColor: 'black',
-            color: '#55bec0',
-            borderWidth: 1,
-            fill: false,
-            tension: .2,
-            spanGaps: true
-            
-  }]
-    },
+    data: JSON.parse(localStorage.getItem(2021)),
     options: {
         scales: {
             y: {
