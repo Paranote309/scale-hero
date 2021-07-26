@@ -183,12 +183,12 @@ localStorage.setItem(2021, JSON.stringify({
   datasets: [{
     label: 'Weight(Kg)',
     data: [79, 80, 85, 80, 75, 75],
-    backgroundColor: 'blue',
+    backgroundColor: '#55BEC08F',
     borderColor: 'black',
     color: '#55bec0',
     borderWidth: 1,
-    fill: false,
-    tension: .2,
+    fill: true,
+    tension: 0.2,
     spanGaps: true
   }]
 }))
