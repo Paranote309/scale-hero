@@ -9,16 +9,6 @@ body {
     color: #55BEC0
 }
 
-footer {
-    width: 100%;
-    text-align: center;
-    height: 10%;
-}
-
-footer p {
-    color:inherit;
-}
-
 /* -------------------- ID's -------------------- */
 
 #bannerImage {
@@ -129,7 +119,10 @@ h1 {
 
 } */
 
-/* ====== Navigation Bar ====== */
+/* ====== Header ====== */
+header {
+    height: 30%;
+}
 
 .navBar {
     background-color: #55BEC0;
@@ -170,11 +163,15 @@ h1 {
     'details graph graph graph graph';
     display: grid;
     grid-gap: 2rem;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     gap: 20px;
-    height: 70%;
+    height: 60%;
 }
 
+.mainGrid h1 {
+    margin: 0;
+}
 
 .mainGrid.Info {
     grid-column: 1;

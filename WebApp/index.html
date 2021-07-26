@@ -5,37 +5,35 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- ================================================= CSS imports ================================================= -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="Assets/jquery-ui-1.12.1.custom/jquery-ui.css">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-        <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+        <link
+            rel="stylesheet"
+            href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin="anonymous"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+
+        <!-- ================================================= Script imports ================================================= -->
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-database.js"></script>
         <script src="Assets\jquery-ui-1.12.1.custom\external\jquery\jquery.js"></script>
         <script src="Assets\jquery-ui-1.12.1.custom\jquery-ui.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"
+            integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+        </script>
+        <script src="js/index.js"></script>
 
     </head>
 
     <body>
 
-        <header>
-            <div class = "buttons left">
-                <button id="add-data" class = "button ui-button ui-corner-all ui-widget">Add Data</button>
-            </div>
-            <div class = "buttons right">
-                <button id="sign-up" class = "button">Sign Up</button>
-                <button id="login" class = "button">Login</button>
-            </div>
-            <div class="banner background">
-                <a href="index.html">
-                    <img src="img/SCALE_HERO_Banner.png"
-                    alt="Website Banner" id = "bannerImage">
-                </a>
-            </div>
-        </header>
-
+        <!-- ================================================= Hidden Dialogue boxes ================================================= -->
         <div id="create-dialogue" title="Create new user">
             <p class="validateTips">All form fields are required.</p>
             <form id = "sign-up-form">
@@ -72,9 +70,22 @@
             </form>
         </div>
 
-        <!-- <nav class="navBar">
-            <a class="active" href="index.html">Home</a>
-        </nav> -->
+        <header>
+            <div class = "buttons left">
+                <button id="add-data" class = "button ui-button ui-corner-all ui-widget">Add Data</button>
+            </div>
+            <div class = "buttons right">
+                <button id="sign-up" class = "button">Sign Up</button>
+                <button id="login" class = "button">Login</button>
+            </div>
+            <div class="banner background">
+                    <img src="img/SCALE_HERO_Banner.png"
+                    alt="Website Banner" id = "bannerImage">
+            </div>
+            <!-- <nav class="navBar">
+                <a class="active" href="index.html">Home</a>
+            </nav> -->
+        </header>
 
         <div class="mainGrid">
 
@@ -83,7 +94,7 @@
             </div>
 
             <div class = "item2 Info">
-                This website includes graphs and information to help you look track your progress.<br>
+                This website includes graphs and information to help you track your progress.<br>
                 This Data was collected using a micro:bit/weight scale<br>
                 You can collect your own data by downloading this <a href="Microbit/Microbit Data Upload.py" target="_blank">program</a> with this <a href="Microbit/microbitModule.py" target="_blank">module</a>
             </div>
@@ -93,7 +104,7 @@
                 <ul>
                     <li>Start: <span id="start-weight"></span></li>
                     <li>Current: <span id="current-weight"></span></li>
-                    <li>Change(%): <span id="change-percentage"></span></li>
+                    <li>Change: <span id="change-percentage"></span></li>
                     <li>Height: <span id="current-height"></span></li>
                 </ul>
             </div>
@@ -108,16 +119,5 @@
             </div>
 
         </div>
-<!--
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-        <script src="JavaScript/index.js"></script> -->
-
     </body>
-
-    <footer>
-        <p>For any questions please <a href="mailto:b.manzambi6@gmail.com">contact me.</a></p>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="js/index.js"></script>
-    </footer>
-
 </html>

@@ -2,6 +2,11 @@ const date = new Date();
 
 var current_username = "ParaNote";
 
+var database = JSON.parse(localStorage.getItem("database"));
+
+var user_data = database.accounts["ParaNote"];
+
+
 // ------------------- Database -------------------//
 
 localStorage.setItem(
@@ -10,7 +15,6 @@ localStorage.setItem(
         "emails" : {
             "benjozoom@gmail.com" : "ParaNote"
         },
-
         "accounts": {
             "ParaNote" : {
                 "password": "benji123",
@@ -25,6 +29,19 @@ localStorage.setItem(
 // ------------------- Login Modal Form -------------------//
 $(function () {
     $("#welcome-name").text(current_username);
+
+    function updateGraphDetails() {
+        let start_weight = user_data.weight_data[0];
+        let current_weight = user_data.weight_data[user_data.weight_data.length - 1];
+
+        $("#start-weight").text(start_weight + "kg");
+        $("#current-weight").text(current_weight + "kg");
+
+        $("#change-percentage").text(Math.round((current_weight - start_weight) / start_weight * 100, 2) + "%");
+        $("#current-height").text(user_data.height + "cm");
+    }
+
+    updateGraphDetails();
 
     var
     form =  $("form"),
@@ -113,12 +130,13 @@ $(function () {
             let database = JSON.parse(localStorage.getItem("database")),
                 current_date = date.getDate() + "/" + (date.getMonth() + 1);
 
-            database.accounts[current_username].weight_data.push(weight_value);
-            database.accounts[current_username].labels.push(current_date);
+            user_data.weight_data.push(weight_value);
+            user_data.labels.push(current_date);
 
             localStorage.setItem("database", JSON.stringify(database));
             console.log( + " " + weight_value);
-            updateChart(lineChart, "Weight (kg)", database.accounts[current_username].labels, database.accounts[current_username].weight_data);
+            updateChart(lineChart, "Weight (kg)", user_data.labels, user_data.weight_data);
+            updateGraphDetails();
             data.dialog("close");
         }
 
@@ -208,73 +226,69 @@ $(function () {
         event.preventDefault();
         addData();
     });
+
+    // ------------------- Chart-------------------
+
+    var ctx = $('#liveChartCanvas');
+
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: user_data.labels,
+            datasets: [{
+                label: 'Weight (kg)',
+                data: user_data.weight_data,
+                backgroundColor: '#55BEC08F',
+                borderColor: 'black',
+                color: '#55bec0',
+                borderWidth: 1,
+                fill: true,
+                tension: 0.2,
+                spanGaps: true
+            }],
+        },
+        // options: {
+        //     scales: {
+        //         xAxes: [{
+        //             display: true
+        //         }],
+        //         yAxes: [{
+        //             ticks: {
+        //                 beginAtZero: true,
+        //                 // Include a celsius symbol in the ticks
+        //                 callback: function (value, index, values) {
+        //                     return value + ' kg';
+        //                 }
+        //             }
+        //         }],
+        //         responsive: true,
+        //     },
+
+        //     tooltips: {
+        //         callbacks: {
+        //             label: function (tooltipItem, data) {
+        //                 var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+        //                 if (label) {
+        //                     label = ' ' + tooltipItem.yLabel + ' kg';
+        //                 }
+        //                 return label;
+        //             },
+        //             value: function (tooltipItem, data) {
+        //                 var value = data.datasets[tooltipItem.datasetIndex].label || '';
+
+        //                 if (value) {
+        //                     value = 'Day: ' + tooltipItem.xLabel;
+        //                 }
+        //                 return value;
+        //             }
+        //         }
+        //     }
+        // }
+    });
 });
 
 // ------------------- Chart Data -------------------//
-
-database = JSON.parse(localStorage.getItem("database"));
-
-user_data = database.accounts["ParaNote"];
-
-// ------------------- Chart-------------------
-
-var ctx = $('#liveChartCanvas');
-
-var lineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: user_data.labels,
-        datasets: [{
-            label: 'Weight (kg)',
-            data: user_data.weight_data,
-            backgroundColor: '#55BEC08F',
-            borderColor: 'black',
-            color: '#55bec0',
-            borderWidth: 1,
-            fill: true,
-            tension: 0.2,
-            spanGaps: true
-        }],
-    },
-    // options: {
-    //     scales: {
-    //         xAxes: [{
-    //             display: true
-    //         }],
-    //         yAxes: [{
-    //             ticks: {
-    //                 beginAtZero: true,
-    //                 // Include a celsius symbol in the ticks
-    //                 callback: function (value, index, values) {
-    //                     return value + ' kg';
-    //                 }
-    //             }
-    //         }],
-    //         responsive: true,
-    //     },
-
-    //     tooltips: {
-    //         callbacks: {
-    //             label: function (tooltipItem, data) {
-    //                 var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-    //                 if (label) {
-    //                     label = ' ' + tooltipItem.yLabel + ' kg';
-    //                 }
-    //                 return label;
-    //             },
-    //             value: function (tooltipItem, data) {
-    //                 var value = data.datasets[tooltipItem.datasetIndex].label || '';
-
-    //                 if (value) {
-    //                     value = 'Day: ' + tooltipItem.xLabel;
-    //                 }
-    //                 return value;
-    //             }
-    //         }
-    //     }
-    // }
-});
 
 // Updates chart with new title and data
 function updateChart(chart, chartTitle, xAxes, yAxes) {
