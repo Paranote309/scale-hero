@@ -1,5 +1,31 @@
+const date = new Date();
+
+var current_username = "ParaNote";
+
+// ------------------- Database -------------------//
+
+localStorage.setItem(
+    "database",
+    JSON.stringify({
+        "emails" : {
+            "benjozoom@gmail.com" : "ParaNote"
+        },
+
+        "accounts": {
+            "ParaNote" : {
+                "password": "benji123",
+                "labels": ['20/07', '21/07', '22/07', '23/07', '24/07', '25/07'],
+                "weight_data" : [79, 80, 85, 80, 75, 75],
+                "height" : 175
+            }
+        }
+    })
+);
+
 // ------------------- Login Modal Form -------------------//
-$( function() {
+$(function () {
+    $("#welcome-name").text(current_username);
+
     var
     form =  $("form"),
 
@@ -78,15 +104,22 @@ $( function() {
 
     function addData() {
         var valid = true;
-        var weight_value = weight.val();
+        var weight_value = parseInt(weight.val());
         allFields.removeClass("ui-state-error");
 
         valid = valid && weight_value > 0;
 
         if (valid) {
-            // add data to database
-            console.log(weight_value);
-            data.dialog( "close" );
+            let database = JSON.parse(localStorage.getItem("database")),
+                current_date = date.getDate() + "/" + (date.getMonth() + 1);
+
+            database.accounts[current_username].weight_data.push(weight_value);
+            database.accounts[current_username].labels.push(current_date);
+
+            localStorage.setItem("database", JSON.stringify(database));
+            console.log( + " " + weight_value);
+            updateChart(lineChart, "Weight (kg)", database.accounts[current_username].labels, database.accounts[current_username].weight_data);
+            data.dialog("close");
         }
 
         return valid;
@@ -110,7 +143,7 @@ $( function() {
           allFields.removeClass( "ui-state-error" );
         }
       });
-  
+
     var loginDialogue = $("#login-dialogue").dialog({
         draggable: false,
         resizable: false,
@@ -178,93 +211,69 @@ $( function() {
 });
 
 // ------------------- Chart Data -------------------//
-localStorage.setItem(2021, JSON.stringify({
-  labels: ['20/07', '21/07', '22/07', '23/07', '24/07', '25/07'],
-  datasets: [{
-    label: 'Weight(Kg)',
-    data: [79, 80, 85, 80, 75, 75],
-    backgroundColor: '#55BEC08F',
-    borderColor: 'black',
-    color: '#55bec0',
-    borderWidth: 1,
-    fill: true,
-    tension: 0.2,
-    spanGaps: true
-  }]
-}))
 
+database = JSON.parse(localStorage.getItem("database"));
+
+user_data = database.accounts["ParaNote"];
 
 // ------------------- Chart-------------------
 
 var ctx = $('#liveChartCanvas');
-var myChart = new Chart(ctx, {
-  type: 'line',
-  // responsive: true,
-    data: JSON.parse(localStorage.getItem(2021)),
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        },
-        responsive: true,
-  }
-});
 
-// ------------------- button-------------------//
-$("#button").click(function(){
-  $("#go").css("background-color","yellow");
-});
-
-// ------------------- change text-------------------//
-
-
-/*
-
-// ------------------- Creating the line chart -------------------
-
-// Getting the canvas element in the HTML
-const chartID = document.getElementById("liveChartCanvas").getContext("2d");
-
-// The line chart object  with place holder name and empty data
-let lineChart = new Chart(chartID, {
+var lineChart = new Chart(ctx, {
     type: 'line',
-    data: { labels: [], datasets: [{ label: '', }] },
-    options: {
-        scales: {
-            xAxes: [{
-                display: true
-            }],
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    // Include a celsius symbol in the ticks
-                    callback: function (value, index, values) {
-                        return value + '°C';
-                    }
-                }
-            }]
-        }, tooltips: {
-            callbacks: {
-                label: function (tooltipItem, data) {
-                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+    data: {
+        labels: user_data.labels,
+        datasets: [{
+            label: 'Weight (kg)',
+            data: user_data.weight_data,
+            backgroundColor: '#55BEC08F',
+            borderColor: 'black',
+            color: '#55bec0',
+            borderWidth: 1,
+            fill: true,
+            tension: 0.2,
+            spanGaps: true
+        }],
+    },
+    // options: {
+    //     scales: {
+    //         xAxes: [{
+    //             display: true
+    //         }],
+    //         yAxes: [{
+    //             ticks: {
+    //                 beginAtZero: true,
+    //                 // Include a celsius symbol in the ticks
+    //                 callback: function (value, index, values) {
+    //                     return value + ' kg';
+    //                 }
+    //             }
+    //         }],
+    //         responsive: true,
+    //     },
 
-                    if (label) {
-                        label = ' ' + tooltipItem.yLabel + '°C';
-                    }
-                    return label;
-                },
-                value: function (tooltipItem, data) {
-                    var value = data.datasets[tooltipItem.datasetIndex].label || '';
+    //     tooltips: {
+    //         callbacks: {
+    //             label: function (tooltipItem, data) {
+    //                 var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-                    if (value) {
-                        value = 'Day: ' + tooltipItem.xLabel;
-                    }
-                    return value;
-                }
-            }
-        }
-    }
+    //                 if (label) {
+    //                     label = ' ' + tooltipItem.yLabel + ' kg';
+    //                 }
+    //                 return label;
+    //             },
+    //             value: function (tooltipItem, data) {
+    //                 var value = data.datasets[tooltipItem.datasetIndex].label || '';
+
+    //                 if (value) {
+    //                     value = 'Day: ' + tooltipItem.xLabel;
+    //                 }
+    //                 return value;
+    //             }
+    //         }
+    //     }
+    // }
 });
 
 // Updates chart with new title and data
@@ -273,19 +282,16 @@ function updateChart(chart, chartTitle, xAxes, yAxes) {
         labels: xAxes,
         datasets: [{
             label: chartTitle,
-            fill: true,
-            backgroundColor: 'rgba(82, 158, 103, .3)',
-            borderColor: 'rgba(75, 158, 103, 1)',
-            hoverBackgroundColor: 'rgba(82, 158, 103, 1)',
-            hoverBorderColor: 'rgba(82, 158, 103, 1)',
-            pointHoverRadius: 5,
             data: yAxes,
         }]
-    }
-    chart.data = chartData
+    };
+    chart.data.labels = xAxes;
+    chart.data.datasets[0].label = chartTitle;
+    chart.data.datasets[0].data = yAxes;
     chart.update();
 }
 
+/*
 
 // ------------------- Firebase Data -------------------
 
@@ -317,7 +323,7 @@ let previousDay = "";
 let temperatureTotal = 0;
 let count = 0;
 
-// ------------------- Functiions -------------------
+// ------------------- Functions -------------------
 
 // updating the chart data from the database
 function updateChartData() {
