@@ -28,6 +28,10 @@ body {
 
 /* -------------------- Classes -------------------- */
 
+.hidden {
+    display: none;
+}
+
 .banner {
     /* background: rgba(0, 128, 128, 0.3); Teal background with 30% opacity */
     text-align: center;

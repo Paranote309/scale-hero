@@ -4,24 +4,27 @@ const date = new Date();
 
 // ------------------- Database -------------------//
 
-localStorage.setItem(
-    "database",
-    JSON.stringify({
-        "emails" : {
-            "benjozoom@gmail.com" : "ParaNote"
-        },
-        "accounts": {
-            "ParaNote" : {
-                "password": "benji123",
-                "labels": ['20/07', '21/07', '22/07', '23/07', '24/07', '25/07'],
-                "weight_data" : [79, 80, 85, 80, 75, 75],
-                "height" : 175
-            }
-        }
-    })
-);
+if (localStorage.getItem("database") == null) {
 
-var current_username = "ParaNote";
+    localStorage.setItem(
+        "database",
+        JSON.stringify({
+            "emails": {
+                "local@email.com": "local"
+            },
+            "accounts": {
+                "local": {
+                    "password": "",
+                    "labels": [],
+                    "weight_data": [],
+                    "height": 0
+                }
+            }
+        })
+    );
+}
+
+var current_username = "local";
 
 var database = JSON.parse(localStorage.getItem("database"));
 
@@ -30,6 +33,7 @@ var user_data = database.accounts[current_username];
 // ------------------- Login Modal Form -------------------//
 $(function () {
     $("#welcome-name").text(current_username);
+    $("#guest-buttons").addClass("hidden");
 
     function updateGraphDetails() {
         let start_weight = user_data.weight_data[0];
