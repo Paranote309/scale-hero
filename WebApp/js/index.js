@@ -25,7 +25,7 @@ var current_username = "ParaNote";
 
 var database = JSON.parse(localStorage.getItem("database"));
 
-var user_data = database.accounts["ParaNote"];
+var user_data = database.accounts[current_username];
 
 // ------------------- Login Modal Form -------------------//
 $(function () {
