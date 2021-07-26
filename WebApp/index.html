@@ -21,7 +21,10 @@
     <body>
 
         <header>
-            <div class = "buttons">
+            <div class = "buttons left">
+                <button id="add-data" class = "button ui-button ui-corner-all ui-widget">Add Data</button>
+            </div>
+            <div class = "buttons right">
                 <button id="sign-up" class = "button">Sign Up</button>
                 <button id="login" class = "button">Login</button>
             </div>
@@ -35,7 +38,7 @@
 
         <div id="create-dialogue" title="Create new user">
             <p class="validateTips">All form fields are required.</p>
-            <form>
+            <form id = "sign-up-form">
               <fieldset>
                 <label for="username">Username: </label>
                 <input type="text" name="username" id="username" value="Jane Smith" class="text ui-widget-content ui-corner-all">
@@ -43,24 +46,28 @@
                 <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
                 <label for="new-password">Password: </label>
                 <input type="password" name="new-password" id="new-password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
-
-                <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
               </fieldset>
             </form>
         </div>
 
         <div id="login-dialogue" title="Log In">
             <p class="validateTips">All form fields are required.</p>
-            <form>
+            <form id="login-form">
               <fieldset>
                 <label for="email-username">Email or Username: </label>
                 <input type="text" name="email-username" id="email-username" value="Jane Smith" class="text ui-widget-content ui-corner-all">
                 <label for="password">Password: </label>
                 <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+              </fieldset>
+            </form>
+        </div>
 
-                <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        <div id="data-dialogue" title="Add Weight">
+            <p class="validateTips">All form fields are required.</p>
+            <form id = "data-form">
+              <fieldset>
+                <label for="weight">Weight: </label>
+                <input type="number" name="weight" id="weight" class="text ui-widget-content ui-corner-all" placeholder="Weight in kg" step="0.001">
               </fieldset>
             </form>
         </div>
