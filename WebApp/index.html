@@ -79,11 +79,11 @@
         <div class="mainGrid">
 
             <div class="item1 welcome">
-                <h1>Welcome Benji</h1>
+                <h1>Welcome <span id="welcome-name">User<span></h1>
             </div>
 
             <div class = "item2 Info">
-                This website includes graphs and information to help Benji look at his weight progress.<br>
+                This website includes graphs and information to help you look track your progress.<br>
                 This Data was collected using a micro:bit/weight scale<br>
                 You can collect your own data by downloading this <a href="Microbit/Microbit Data Upload.py" target="_blank">program</a> with this <a href="Microbit/microbitModule.py" target="_blank">module</a>
             </div>
@@ -91,10 +91,10 @@
             <div class = "item3 details">
                 Graph Details Here:
                 <ul>
-                    <li>Start:</li>
-                    <li>Current:</li>
-                    <li>Change(%):</li>
-                    <li>Height:</li>
+                    <li>Start: <span id="start-weight"></span></li>
+                    <li>Current: <span id="current-weight"></span></li>
+                    <li>Change(%): <span id="change-percentage"></span></li>
+                    <li>Height: <span id="current-height"></span></li>
                 </ul>
             </div>
 
