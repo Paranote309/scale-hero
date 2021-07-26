@@ -1,6 +1,7 @@
 // ------------------- Login Modal Form -------------------//
 $( function() {
-    var form,
+    var
+    form =  $("form"),
 
       // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
       emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
@@ -76,11 +77,11 @@ $( function() {
     }
 
     function addData() {
-        var valid = true
-        var weight_value = weight.val()
+        var valid = true;
+        var weight_value = weight.val();
         allFields.removeClass("ui-state-error");
 
-        valid &&= weight_value > 0;
+        valid = valid && weight_value > 0;
 
         if (valid) {
             // add data to database
@@ -96,7 +97,6 @@ $( function() {
         resizable: false,
         dialogClass: "no-close",
         autoOpen: false,
-        // height: auto,
         width: 350,
         modal: true,
         buttons: {
@@ -106,68 +106,75 @@ $( function() {
           }
         },
         close: function() {
-          form[ 0 ].reset();
+          form[ 0 ].reset(); // reset form
           allFields.removeClass( "ui-state-error" );
         }
       });
 
-    var login = $("#login-dialogue").dialog({
+    var loginDialogue = $("#login-dialogue").dialog({
         draggable: false,
         resizable: false,
         dialogClass: "no-close",
         autoOpen: false,
-        // height: auto,
         width: 350,
         modal: true,
         buttons: {
-          "Login": login,
-          Cancel: function() {
-            login.dialog( "close" );
-          }
+            "Login": login,
+            Cancel: function() {
+                loginDialogue.dialog( "close" );
+            }
         },
         close: function() {
-          form[ 1 ].reset();
+          form[ 1 ].reset(); // reset form
           allFields.removeClass( "ui-state-error" );
         }
-      });
+    });
 
     var data = $("#data-dialogue").dialog({
         draggable: false,
         resizable: false,
         dialogClass: "no-close",
         autoOpen: false,
-        // height: auto,
         width: 350,
         modal: true,
         buttons: {
-          "Add": addData,
-          Cancel: function() {
-            data.dialog( "close" );
-          }
+            "Add": addData,
+            Cancel: function() {
+                data.dialog( "close" );
+            }
         },
         close: function() {
-          form[ 2 ].reset(); // reset form
-          allFields.removeClass( "ui-state-error" );
+            form[ 2 ].reset(); // reset form
+            allFields.removeClass( "ui-state-error" );
         }
-      });
+    });
 
-      // disable form submit
-      form = $( "form" ).on( "submit", function( event ) {
-        return false;
-      });
+    $( "#sign-up" ).button().on( "click", function() {
+    create.dialog("open");
+    });
 
-      $( "#sign-up" ).button().on( "click", function() {
-        create.dialog( "open" );
-      });
+    $( "#login" ).button().on( "click", function() {
+        loginDialogue.dialog("open");
+    });
 
-      $( "#login" ).button().on( "click", function() {
-        login.dialog( "open" );
-      });
+    $( "#add-data" ).button().on( "click", function() {
+        data.dialog("open");
+    });
 
-      $( "#add-data" ).button().on( "click", function() {
-        data.dialog( "open" );
-      });
+    $( "#sign-up-form" ).on( "submit", function( event ) {
+        event.preventDefault();
+        addUser();
+    });
 
+    $( "#login-form" ).on( "submit", function( event ) {
+        event.preventDefault();
+        login();
+    });
+
+    $( "#data-form" ).on("submit", function (event) {
+        event.preventDefault();
+        addData();
+    });
 });
 
 // ------------------- Chart Data -------------------//
