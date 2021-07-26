@@ -1,11 +1,6 @@
+// ------------------- Constants -------------------//
+
 const date = new Date();
-
-var current_username = "ParaNote";
-
-var database = JSON.parse(localStorage.getItem("database"));
-
-var user_data = database.accounts["ParaNote"];
-
 
 // ------------------- Database -------------------//
 
@@ -25,6 +20,12 @@ localStorage.setItem(
         }
     })
 );
+
+var current_username = "ParaNote";
+
+var database = JSON.parse(localStorage.getItem("database"));
+
+var user_data = database.accounts["ParaNote"];
 
 // ------------------- Login Modal Form -------------------//
 $(function () {
@@ -127,8 +128,7 @@ $(function () {
         valid = valid && weight_value > 0;
 
         if (valid) {
-            let database = JSON.parse(localStorage.getItem("database")),
-                current_date = date.getDate() + "/" + (date.getMonth() + 1);
+            let current_date = date.getDate() + "/" + (date.getMonth() + 1);
 
             user_data.weight_data.push(weight_value);
             user_data.labels.push(current_date);
