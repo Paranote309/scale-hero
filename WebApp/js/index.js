@@ -37,7 +37,7 @@ $(function () {
         $("#start-weight").text(start_weight + "kg");
         $("#current-weight").text(current_weight + "kg");
 
-        $("#change-percentage").text(Math.round((current_weight - start_weight) / start_weight * 100, 2) + "%");
+        $("#change-percentage").text((((current_weight - start_weight) / start_weight) * 100).toFixed(2) + "%");
         $("#current-height").text(user_data.height + "cm");
     }
 
