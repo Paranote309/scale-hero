@@ -86,11 +86,19 @@ h1 {
 }
 
 /* ====== Buttons ====== */
+
 .buttons {
     position: absolute;
     top: 2rem;
+    width: auto;
+}
+
+.buttons.right {
     right: 0;
-    width: 14rem;
+}
+
+.buttons.left {
+    left: .7rem;
 }
 
 .button {

@@ -11,6 +11,7 @@ Notes:
   - https://gpiozero.readthedocs.io/en/stable/#
   - https://manuall.co.uk/silvercrest-spw-180-e1-scale/
   - https://hackaday.io/project/1242-giving-a-cheap-digital-scale-serial-out
+  - https://github.com/daferdur/pxt-myHX711
 
 
 Authors:
