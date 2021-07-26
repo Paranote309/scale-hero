@@ -122,10 +122,10 @@ $( function() {
 
 // ------------------- Chart Data -------------------//
 localStorage.setItem(2021, JSON.stringify({
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  labels: ['20/07', '21/07', '22/07', '23/07', '24/07', '25/07'],
   datasets: [{
-    label: '# of Votes',
-    data: [12, 19, 3, 5, 2, 3],
+    label: 'Weight(Kg)',
+    data: [79, 80, 85, 80, 75, 75],
     backgroundColor: 'blue',
     borderColor: 'black',
     color: '#55bec0',
@@ -158,6 +158,8 @@ var myChart = new Chart(ctx, {
 $("#button").click(function(){
   $("#go").css("background-color","yellow");
 });
+
+// ------------------- change text-------------------//
 
 
 /*
