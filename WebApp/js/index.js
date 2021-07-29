@@ -34,16 +34,23 @@ var user_data = database.accounts[current_username];
 $(function () {
     $("#welcome-name").text(current_username);
     $("#guest-buttons").addClass("hidden");
+    const bmi = function (weight) { return ((weight / (Math.pow(user_data.height, 2) / 100)) * 100).toFixed(2); };
+    const change_percentage = function (value1, value2) { return (((value2 - value1) / value1) * 100).toFixed(2);};
 
     function updateGraphDetails() {
         let start_weight = user_data.weight_data[0];
         let current_weight = user_data.weight_data[user_data.weight_data.length - 1];
+        let start_bmi = bmi(start_weight);
+        let current_bmi = bmi(current_weight);
 
         $("#start-weight").text(start_weight + "kg");
         $("#current-weight").text(current_weight + "kg");
 
-        $("#change-percentage").text((((current_weight - start_weight) / start_weight) * 100).toFixed(2) + "%");
+        $("#weight-change-percentage").text(change_percentage(start_weight, current_weight) + "%");
         $("#current-height").text(user_data.height + "cm");
+
+        $("#current-bmi").text(current_bmi);
+        $("#bmi-change").text((current_bmi - start_bmi).toFixed(2));
     }
 
     updateGraphDetails();
@@ -57,6 +64,7 @@ $(function () {
       email = $( "#email" ),
       password = $( "#password" ),
       weight = $("#weight"),
+      height = $("#height"),
       allFields = $( [] ).add( name ).add( email ).add( password ),
       tips = $( ".validateTips" );
 
@@ -127,15 +135,18 @@ $(function () {
     function addData() {
         var valid = true;
         var weight_value = parseInt(weight.val());
+        var height_value = parseInt(height.val());
         allFields.removeClass("ui-state-error");
 
         valid = valid && weight_value > 0;
+        valid = valid && height_value > 0;
 
         if (valid) {
             let current_date = date.getDate() + "/" + (date.getMonth() + 1);
 
             user_data.weight_data.push(weight_value);
             user_data.labels.push(current_date);
+            user_data.height = height_value;
 
             localStorage.setItem("database", JSON.stringify(database));
             console.log( + " " + weight_value);
