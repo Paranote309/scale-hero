@@ -3,6 +3,7 @@
 const date = new Date();
 
 // ------------------- Database -------------------//
+var logged_in = true;
 
 if (localStorage.getItem("database") == null) {
 
@@ -22,6 +23,8 @@ if (localStorage.getItem("database") == null) {
             }
         })
     );
+
+    logged_in = false;
 }
 
 var current_username = "local";
@@ -32,8 +35,6 @@ var user_data = database.accounts[current_username];
 
 // ------------------- Login Modal Form -------------------//
 $(function () {
-    $("#welcome-name").text(current_username);
-    $("#guest-buttons").addClass("hidden");
     const bmi = function (weight) { return ((weight / (Math.pow(user_data.height, 2) / 100)) * 100).toFixed(2); };
     const change_percentage = function (value1, value2) { return (((value2 - value1) / value1) * 100).toFixed(2);};
 
@@ -53,16 +54,20 @@ $(function () {
         $("#bmi-change").text((current_bmi - start_bmi).toFixed(2));
     }
 
-    updateGraphDetails();
+    if (logged_in) {
+        $("#welcome-name").text(current_username);
+        $("#guest-buttons").addClass("hidden");
+        updateGraphDetails();
+    }
 
     var
     form =  $("form"),
 
       // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
       emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-      name = $( "#name" ),
+      name = $( "#username" ),
       email = $( "#email" ),
-      password = $( "#password" ),
+      password = $( "#new-password" ),
       weight = $("#weight"),
       height = $("#height"),
       allFields = $( [] ).add( name ).add( email ).add( password ),
@@ -135,27 +140,37 @@ $(function () {
     function addData() {
         var valid = true;
         var weight_value = parseInt(weight.val());
-        var height_value = parseInt(height.val());
         allFields.removeClass("ui-state-error");
 
         valid = valid && weight_value > 0;
-        valid = valid && height_value > 0;
 
         if (valid) {
             let current_date = date.getDate() + "/" + (date.getMonth() + 1);
 
             user_data.weight_data.push(weight_value);
             user_data.labels.push(current_date);
-            user_data.height = height_value;
 
             localStorage.setItem("database", JSON.stringify(database));
-            console.log( + " " + weight_value);
             updateChart(lineChart, "Weight (kg)", user_data.labels, user_data.weight_data);
             updateGraphDetails();
             data.dialog("close");
         }
 
         return valid;
+    }
+
+    function changeSettings() {
+        var valid = true;
+        var height_value = parseInt(height.val());
+        valid = valid && height_value > 0;
+
+        if (valid) {
+            user_data.height = height_value;
+            localStorage.setItem("database", JSON.stringify(database));
+            updateGraphDetails();
+            settings.dialog("close");
+        }
+
     }
 
     var create = $("#create-dialogue").dialog({
@@ -215,6 +230,25 @@ $(function () {
         }
     });
 
+    var settings = $("#settings-dialogue").dialog({
+        draggable: false,
+        resizable: false,
+        dialogClass: "no-close",
+        autoOpen: false,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Add": changeSettings,
+            Cancel: function() {
+                settings.dialog( "close" );
+            }
+        },
+        close: function() {
+            form[ 3 ].reset(); // reset form
+            allFields.removeClass( "ui-state-error" );
+        }
+    });
+
     $( "#sign-up" ).button().on( "click", function() {
     create.dialog("open");
     });
@@ -227,19 +261,38 @@ $(function () {
         data.dialog("open");
     });
 
-    $( "#sign-up-form" ).on( "submit", function( event ) {
-        event.preventDefault();
-        addUser();
+    $( "#settings-button" ).button().on( "click", function() {
+        settings.dialog("open");
     });
 
-    $( "#login-form" ).on( "submit", function( event ) {
+    // prevent default
+    $("form").on("submit", function (event) {
         event.preventDefault();
-        login();
+        return false;
     });
 
-    $( "#data-form" ).on("submit", function (event) {
-        event.preventDefault();
-        addData();
+    $("#sign-up-form").on("keypress", function (event) {
+        if (event.which == 13) {
+            addUser();
+        }
+    });
+
+    $( "#login-form" ).on( "keypress", function(event) {
+        if (event.which == 13) {
+            login();
+        }
+    });
+
+    $( "#data-form" ).on("keypress", function (event) {
+        if (event.which == 13) {
+            addData();
+        }
+    });
+
+    $("#settings-form").on("keypress", function (event) {
+        if (event.which == 13) {
+            changeSettings();
+        }
     });
 
     // ------------------- Chart-------------------
@@ -259,7 +312,8 @@ $(function () {
                 borderWidth: 1,
                 fill: true,
                 tension: 0.2,
-                spanGaps: true
+                spanGaps: true,
+                maintainAspectRatio: true
             }],
         },
         // options: {

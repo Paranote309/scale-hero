@@ -16,6 +16,7 @@ body {
     max-width: 500px;
     width: auto;
 }
+
 #rightli { /* For the info page in the navabar */
     float: right
 }
@@ -35,7 +36,7 @@ body {
 .banner {
     /* background: rgba(0, 128, 128, 0.3); Teal background with 30% opacity */
     text-align: center;
-    height: 20%;
+    /* height: 20%; */
 }
 
 .welcome {
@@ -46,8 +47,14 @@ body {
 
 
 /* ====== Login Modal ====== */
-label, input {
+label {
     display:block;
+    margin-bottom: .5rem;
+}
+
+input {
+    display:block;
+    margin-bottom: 1.5rem;
 }
 
 input.text {
@@ -169,8 +176,8 @@ header {
     grid-gap: 2rem;
     padding-left: 20px;
     padding-right: 20px;
-    gap: 20px;
-    height: 60%;
+    /* gap: 20px;s */
+    max-height: calc(100vh - 2rem);
 }
 
 .mainGrid h1 {
@@ -189,10 +196,6 @@ header {
     font-weight: 700;
     font-style: italic;
 }
-
-/* .mainGrid {
-    /* background-color: lightblue;
-} */
 
 /* ====== Details ====== */
 
@@ -229,7 +232,7 @@ header {
     right: 4rem;
 }
 
-#settings-icon {
+#settings-button {
     position: absolute;
     background: none;
     border: none;
@@ -237,7 +240,7 @@ header {
     color: blue;
 }
 
-#settings-icon :hover {
+#settings-button :hover {
     cursor: pointer;
     color: #55bec0;
 }

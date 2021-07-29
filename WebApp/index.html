@@ -38,12 +38,12 @@
             <p class="validateTips">All form fields are required.</p>
             <form id = "sign-up-form">
               <fieldset>
-                <label for="username">Username: </label>
-                <input type="text" name="username" id="username" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                <label for="username">Create Username: </label>
+                <input type="text" name="username" id="username"  class="text ui-widget-content ui-corner-all">
                 <label for="email">Email: </label>
-                <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-                <label for="new-password">Password: </label>
-                <input type="password" name="new-password" id="new-password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+                <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
+                <label for="new-password">Create Password: </label>
+                <input type="password" name="new-password" id="new-password" class="text ui-widget-content ui-corner-all">
               </fieldset>
             </form>
         </div>
@@ -53,9 +53,9 @@
             <form id="login-form">
               <fieldset>
                 <label for="email-username">Email or Username: </label>
-                <input type="text" name="email-username" id="email-username" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                <input type="text" name="email-username" id="email-username" class="text ui-widget-content ui-corner-all">
                 <label for="password">Password: </label>
-                <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+                <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
               </fieldset>
             </form>
         </div>
@@ -66,6 +66,14 @@
               <fieldset>
                 <label for="weight">Weight: </label>
                 <input type="number" name="weight" id="weight" class="text ui-widget-content ui-corner-all" placeholder="Weight in kg" step="0.001">
+              </fieldset>
+            </form>
+        </div>
+
+        <div id="settings-dialogue" title="Change Settings">
+            <p class="validateTips">All form fields are required.</p>
+            <form id = "settings-form">
+              <fieldset>
                 <label for="height">Height: </label>
                 <input type="number" name="height" id="height" class="text ui-widget-content ui-corner-all" placeholder="Height in cm" step="0.001">
               </fieldset>
@@ -73,17 +81,6 @@
         </div>
 
         <header>
-            <div class = "buttons left">
-                <button id="add-data" class = "button ui-button ui-corner-all ui-widget">Add Data</button>
-            </div>
-            <div id = "guest-buttons" class = "buttons right hidden">
-                <button id="sign-up" class = "button">Sign Up</button>
-                <button id="login" class = "button">Login</button>
-            </div>
-            <div class="banner background">
-                    <img src="img/SCALE_HERO_Banner.png"
-                    alt="Website Banner" id = "bannerImage">
-            </div>
             <!-- <nav class="navBar">
                 <a class="active" href="index.html">Home</a>
             </nav> -->
@@ -92,7 +89,18 @@
         <div class="mainGrid">
 
             <div class="item1 welcome">
-                <h1>Welcome <span id="welcome-name">User<span></h1>
+                <div class = "buttons left">
+                    <button id="add-data" class = "button ui-button ui-corner-all ui-widget">Add Data</button>
+                </div>
+                <div id = "guest-buttons" class = "buttons right">
+                    <button id="sign-up" class = "button">Sign Up</button>
+                    <button id="login" class = "button">Login</button>
+                </div>
+                <div class="banner">
+                        <img src="img/SCALE_HERO_Banner.png"
+                        alt="Website Banner" id = "bannerImage">
+                </div>
+                <h1>Welcome <span id="welcome-name"><span></h1>
             </div>
 
             <div class = "item2 Info">
@@ -102,11 +110,14 @@
             </div>
 
             <div class = "item3 details">
-                Graph Details Here:
+                Weight Info:
                 <ul>
                     <li>Start: <span id="start-weight"></span></li>
                     <li>Current: <span id="current-weight"></span></li>
                     <li>Weight Change: <span id="weight-change-percentage"></span></li>
+                </ul>
+                BMI Info:
+                <ul>
                     <li>Height: <span id="current-height"></span></li>
                     <li>BMI: <span id="current-bmi"></span></li>
                     <li>BMI Change: <span id="bmi-change"></span></li>
@@ -117,7 +128,7 @@
                 <div class = "chart">
                 <canvas id="liveChartCanvas"></canvas>
                     <div class = "chart-settings">
-                        <button id = "settings-icon" onclick="javascript:alert('Settings')"><i class="fas fa-cog"></i></button>
+                        <button id = "settings-button"><i class="fas fa-cog"></i></button>
                     </div>
                 </div>
             </div>
